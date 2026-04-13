@@ -1,0 +1,247 @@
+# Copyright (C) 2024 Divit
+# This file is distributed under the same license as the Divit RobotTXT plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Divit RobotTXT 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/divit-robottxt\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-01-01T00:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.x\n"
+"X-Domain: divit-robottxt\n"
+
+#. Plugin Name of the plugin
+msgid "Divit RobotTXT"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/divit-robottxt/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Manage your robots.txt content from the WordPress admin panel. Content is served via WordPress hook — no file is ever written to disk."
+msgstr ""
+
+#. Author of the plugin
+msgid "Divit"
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "Line %d exceeds the maximum allowed length of 2048 characters."
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "Line %1$d is not a valid directive: \"%2$s\". Expected format is \"Directive: value\"."
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "Line %1$d contains an unknown directive: \"%2$s\"."
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "Line %d: User-agent must have a value (e.g., \"User-agent: *\")."
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "Line %1$d: Crawl-delay value must be a number. Got: \"%2$s\"."
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "Line %d: Sitemap directive must include a URL."
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "Line %1$d: Sitemap URL should start with http:// or https://. Got: \"%2$s\"."
+msgstr ""
+
+#: includes/class-divit-robottxt-validator.php
+msgid "No User-agent directive found. At least one User-agent rule is recommended."
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Divit RobotTXT"
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Security check failed. Please try again."
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Error"
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "You do not have permission to change these settings."
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Forbidden"
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "This will replace the current content with the recommended template. Continue?"
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Validating\u2026"
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Content is valid."
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Valid, but with warnings:"
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Validation failed:"
+msgstr ""
+
+#: admin/class-divit-robottxt-admin.php
+msgid "Network error. Please try again."
+msgstr ""
+
+#: admin/class-divit-robottxt-ajax.php
+msgid "Insufficient permissions."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "robots.txt content saved successfully."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Save failed:"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Physical file detected:"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "A robots.txt file exists in your WordPress root directory. Your web server will serve that file directly, bypassing this plugin entirely. Remove the file to use this plugin."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Search engines are discouraged:"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Your site is configured to discourage search engines in %s. This plugin respects that setting and will not override the restrictive robots.txt WordPress generates. Change that setting first to use your custom content."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Reading Settings"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Editor toolbar"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Load Recommended Template"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Validate"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Quick-add directives"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Quick add:"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "robots.txt content"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Each line must be a valid robots.txt directive. Lines beginning with # are treated as comments. Leave blank to use WordPress's default output."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Save Changes"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "View robots.txt"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Plugin information"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Status"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Physical robots.txt file found — plugin bypassed"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "No physical robots.txt file"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Site is visible to search engines"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Discourage search engines is ON"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Custom content active"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Using WordPress default"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Valid Directives"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Target all bots, or a specific bot name."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Block crawlers from a path."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Explicitly allow a path (overrides Disallow)."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Seconds between requests (not all bots honour this)."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Full URL to your XML sitemap."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Lines starting with # are ignored by crawlers."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "How It Works"
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "Content is stored in the WordPress database and served dynamically via the robots_txt filter. No file is written to disk."
+msgstr ""
+
+#: admin/partials/admin-display.php
+msgid "WordPress intercepts requests to /robots.txt when no physical file exists in your site root. If a physical file is found, your server serves it directly and this plugin is bypassed."
+msgstr ""

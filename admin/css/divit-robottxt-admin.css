@@ -1,0 +1,291 @@
+/**
+ * Divit RobotTXT — Admin styles
+ *
+ * Scoped to .divit-robottxt-wrap so these rules cannot leak into other
+ * admin pages or WordPress core UI.
+ *
+ * @package Divit_RobotTXT
+ * @since   1.0.0
+ */
+
+/* ── Page wrapper ──────────────────────────────────────────────────────────── */
+
+.divit-robottxt-wrap {
+	max-width: 1200px;
+}
+
+.divit-robottxt-page-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.divit-robottxt-page-title .dashicons {
+	font-size: 28px;
+	width: 28px;
+	height: 28px;
+	color: #2271b1;
+}
+
+/* ── Two-column layout ─────────────────────────────────────────────────────── */
+
+.divit-robottxt-layout {
+	display: grid;
+	grid-template-columns: 1fr 300px;
+	gap: 24px;
+	align-items: start;
+	margin-top: 16px;
+}
+
+@media screen and (max-width: 960px) {
+	.divit-robottxt-layout {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ── Toolbar ───────────────────────────────────────────────────────────────── */
+
+.divit-robottxt-toolbar {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.divit-robottxt-toolbar .button .dashicons {
+	margin-top: 3px;
+	margin-right: 2px;
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	vertical-align: text-bottom;
+}
+
+/* ── Validation result ─────────────────────────────────────────────────────── */
+
+.divit-validation-result {
+	font-size: 13px;
+	padding: 4px 0;
+	flex: 1;
+	min-width: 0;
+}
+
+.divit-validation-result.is-valid {
+	color: #1a7e36;
+}
+
+.divit-validation-result.is-valid .dashicons {
+	color: #1a7e36;
+}
+
+.divit-validation-result.is-error {
+	color: #cc1818;
+}
+
+.divit-validation-result.is-warning {
+	color: #996800;
+}
+
+.divit-validation-result ul {
+	margin: 4px 0 0 16px;
+	padding: 0;
+	list-style: disc;
+}
+
+/* ── Quick-add strip ───────────────────────────────────────────────────────── */
+
+.divit-quick-add {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+	margin-bottom: 10px;
+	padding: 8px 10px;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+.divit-quick-add__label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #50575e;
+	white-space: nowrap;
+}
+
+.divit-quick-insert {
+	font-family: Consolas, Monaco, "Courier New", monospace;
+	font-size: 11px !important;
+}
+
+/* ── Editor textarea ───────────────────────────────────────────────────────── */
+
+.divit-editor-wrap {
+	margin-bottom: 16px;
+}
+
+.divit-editor {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: Consolas, Monaco, "Courier New", monospace;
+	font-size: 13px;
+	line-height: 1.6;
+	padding: 12px 14px;
+	background: #1e1e1e;
+	color: #d4d4d4;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+	resize: vertical;
+	tab-size: 4;
+	white-space: pre;
+	overflow-x: auto;
+	transition: border-color 0.1s ease;
+}
+
+.divit-editor:focus {
+	border-color: #2271b1;
+	outline: 2px solid transparent;
+	box-shadow: 0 0 0 2px #2271b1;
+}
+
+.divit-editor-wrap .description {
+	margin-top: 6px;
+	color: #646970;
+}
+
+/* ── Form actions ──────────────────────────────────────────────────────────── */
+
+.divit-form-actions {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.divit-form-actions .button .dashicons {
+	margin-top: 3px;
+	margin-right: 2px;
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+	vertical-align: text-bottom;
+}
+
+/* ── Sidebar cards ─────────────────────────────────────────────────────────── */
+
+.divit-robottxt-sidebar {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.divit-card {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	padding: 16px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.divit-card__title {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 0 0 12px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #f0f0f1;
+	font-size: 13px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.divit-card__title .dashicons {
+	color: #2271b1;
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+.divit-card p {
+	margin: 0 0 8px;
+	font-size: 13px;
+	color: #50575e;
+	line-height: 1.5;
+}
+
+.divit-card p:last-child {
+	margin-bottom: 0;
+}
+
+/* ── Status list ───────────────────────────────────────────────────────────── */
+
+.divit-status-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.divit-status-list__item {
+	display: flex;
+	align-items: flex-start;
+	gap: 6px;
+	padding: 5px 0;
+	font-size: 13px;
+	line-height: 1.4;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.divit-status-list__item:last-child {
+	border-bottom: none;
+}
+
+.divit-status-list__item .dashicons {
+	flex-shrink: 0;
+	font-size: 18px;
+	width: 18px;
+	height: 18px;
+	margin-top: 0;
+}
+
+.divit-status-list__item.is-ok .dashicons {
+	color: #1a7e36;
+}
+
+.divit-status-list__item.is-warning .dashicons {
+	color: #996800;
+}
+
+.divit-status-list__item.is-neutral .dashicons {
+	color: #50575e;
+}
+
+/* ── Directives reference ──────────────────────────────────────────────────── */
+
+.divit-directives {
+	margin: 0;
+	font-size: 12px;
+}
+
+.divit-directives dt {
+	margin-top: 8px;
+	font-weight: normal;
+}
+
+.divit-directives dt:first-child {
+	margin-top: 0;
+}
+
+.divit-directives dt code {
+	background: #f0f0f1;
+	padding: 1px 5px;
+	border-radius: 3px;
+	font-size: 12px;
+	color: #1d2327;
+}
+
+.divit-directives dd {
+	margin: 2px 0 0 0;
+	color: #646970;
+	line-height: 1.4;
+}

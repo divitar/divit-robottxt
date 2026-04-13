@@ -1,0 +1,13 @@
+# Environment variables — never commit real credentials.
+.env
+
+# Docker named volumes are managed by Docker, not git.
+# (nothing to ignore here — named volumes live outside the project tree)
+
+# OS / editor noise.
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/

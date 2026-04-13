@@ -1,0 +1,9 @@
+# Exclude files that don't belong inside the container volume.
+.git
+.gitignore
+.dockerignore
+.env
+.env.example
+docker-compose.yml
+Makefile
+README.md

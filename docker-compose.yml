@@ -1,0 +1,94 @@
+services:
+
+  # ── MySQL 8 ────────────────────────────────────────────────────────────────
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE:      ${MYSQL_DATABASE:-wordpress}
+      MYSQL_USER:          ${MYSQL_USER:-wordpress}
+      MYSQL_PASSWORD:      ${MYSQL_PASSWORD:-wordpress}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootsecret}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-rootsecret}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── WordPress (Apache + PHP 8.1) ────────────────────────────────────────────
+  wordpress:
+    image: wordpress:php8.1-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WP_PORT:-8888}:80"
+    environment:
+      WORDPRESS_DB_HOST:     db
+      WORDPRESS_DB_NAME:     ${MYSQL_DATABASE:-wordpress}
+      WORDPRESS_DB_USER:     ${MYSQL_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
+      WORDPRESS_DEBUG:       "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_LOG',     true  );
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'SCRIPT_DEBUG',     true  );
+        define( 'SAVEQUERIES',      true  );
+    volumes:
+      # Plugin source mounted directly — changes reflect instantly, no rebuild needed.
+      - .:/var/www/html/wp-content/plugins/divit-robottxt:cached
+      # Named volume keeps the rest of WordPress between restarts.
+      - wp_data:/var/www/html
+    networks:
+      - wp_net
+
+  # ── WP-CLI (on-demand, not started automatically) ───────────────────────────
+  # Usage:  docker compose run --rm wpcli <wp command>
+  # Setup:  docker compose run --rm wpcli wp --info
+  wpcli:
+    image: wordpress:cli-php8.1
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      WORDPRESS_DB_HOST:     db
+      WORDPRESS_DB_NAME:     ${MYSQL_DATABASE:-wordpress}
+      WORDPRESS_DB_USER:     ${MYSQL_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
+    volumes:
+      - .:/var/www/html/wp-content/plugins/divit-robottxt:cached
+      - wp_data:/var/www/html
+    networks:
+      - wp_net
+    # WP-CLI must run as www-data to match file ownership of the WordPress volume.
+    user: "33:33"
+
+  # ── phpMyAdmin ──────────────────────────────────────────────────────────────
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${PMA_PORT:-8081}:80"
+    environment:
+      PMA_HOST:     db
+      PMA_USER:     ${MYSQL_USER:-wordpress}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
+    networks:
+      - wp_net
+
+volumes:
+  db_data:
+  wp_data:
+
+networks:
+  wp_net:
+    driver: bridge
