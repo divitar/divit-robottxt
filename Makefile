@@ -4,7 +4,7 @@
 # Usage:  make <target>
 # =============================================================================
 
-.PHONY: up down restart setup logs shell db-shell wpcli reset help
+.PHONY: up down restart setup logs shell db-shell wpcli build build-dry reset help
 
 # Detect docker compose v2 (plugin) vs v1 (standalone binary).
 DOCKER_COMPOSE := $(shell docker compose version > /dev/null 2>&1 && echo "docker compose" || echo "docker-compose")
@@ -24,6 +24,14 @@ restart:
 ## setup: Install WordPress and activate the plugin (run once after "make up").
 setup:
 	bash bin/setup.sh
+
+## build: Create a distribution zip in dist/ ready for WordPress.org / manual install.
+build:
+	bash bin/build.sh
+
+## build-dry: Preview what files would be included in the package without creating it.
+build-dry:
+	bash bin/build.sh --dry-run
 
 ## logs: Tail WordPress container logs.
 logs:
