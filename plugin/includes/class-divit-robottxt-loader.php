@@ -23,13 +23,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Divit_RobotTXT_Loader {
 
 	/**
-	 * Run the loader: load files, register text domain, wire up hooks.
+	 * Run the loader: load files and wire up hooks.
 	 *
 	 * @since 1.0.0
 	 */
 	public function run() {
 		$this->load_dependencies();
-		$this->register_textdomain();
 		$this->register_robots_hooks();
 
 		if ( is_admin() ) {
@@ -51,24 +50,6 @@ class Divit_RobotTXT_Loader {
 			require_once DIVIT_ROBOTTXT_PLUGIN_DIR . 'admin/class-divit-robottxt-admin.php';
 			require_once DIVIT_ROBOTTXT_PLUGIN_DIR . 'admin/class-divit-robottxt-ajax.php';
 		}
-	}
-
-	/**
-	 * Register the plugin text domain on the `init` hook.
-	 *
-	 * @since 1.0.0
-	 */
-	private function register_textdomain() {
-		add_action(
-			'init',
-			static function () {
-				load_plugin_textdomain(
-					'divit-robottxt',
-					false,
-					dirname( plugin_basename( DIVIT_ROBOTTXT_PLUGIN_FILE ) ) . '/languages/'
-				);
-			}
-		);
 	}
 
 	/**

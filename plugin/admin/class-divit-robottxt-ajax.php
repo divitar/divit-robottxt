@@ -43,8 +43,8 @@ class Divit_RobotTXT_Ajax {
 			);
 		}
 
-		// 3. Retrieve and prepare the submitted content.
-		$raw      = isset( $_POST['content'] ) ? $_POST['content'] : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// 3. Retrieve, unslash and prepare the submitted content.
+		$raw      = isset( $_POST['content'] ) ? wp_unslash( $_POST['content'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$prepared = Divit_RobotTXT_Validator::prepare( $raw );
 
 		// 4. Run validation.
