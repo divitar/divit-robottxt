@@ -15,35 +15,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // ── Gather data needed by the view ───────────────────────────────────────────
 
-$stored_content  = Divit_RobotTXT_Options::get_rules();
-$user_id         = get_current_user_id();
-$blog_public     = (bool) get_option( 'blog_public', true );
-$physical_exists = file_exists( ABSPATH . 'robots.txt' );
+$divit_robottxt_stored_content  = Divit_RobotTXT_Options::get_rules();
+$divit_robottxt_user_id         = get_current_user_id();
+$divit_robottxt_blog_public     = (bool) get_option( 'blog_public', true );
+$divit_robottxt_physical_exists = file_exists( ABSPATH . 'robots.txt' );
 
 // After a failed save, restore the last submitted content so the user
 // doesn't lose their work.
-$submitted_content = get_transient( 'divit_robottxt_submitted_' . $user_id );
-$error_message     = get_transient( 'divit_robottxt_error_' . $user_id );
+$divit_robottxt_submitted_content = get_transient( 'divit_robottxt_submitted_' . $divit_robottxt_user_id );
+$divit_robottxt_error_message     = get_transient( 'divit_robottxt_error_' . $divit_robottxt_user_id );
 
-if ( false !== $submitted_content ) {
-	$display_content = $submitted_content;
-	delete_transient( 'divit_robottxt_submitted_' . $user_id );
+if ( false !== $divit_robottxt_submitted_content ) {
+	$divit_robottxt_display_content = $divit_robottxt_submitted_content;
+	delete_transient( 'divit_robottxt_submitted_' . $divit_robottxt_user_id );
 } else {
-	$display_content = $stored_content;
+	$divit_robottxt_display_content = $divit_robottxt_stored_content;
 }
 
-if ( false !== $error_message ) {
-	delete_transient( 'divit_robottxt_error_' . $user_id );
+if ( false !== $divit_robottxt_error_message ) {
+	delete_transient( 'divit_robottxt_error_' . $divit_robottxt_user_id );
 }
 
 // ── Status flags ─────────────────────────────────────────────────────────────
 
-$has_content  = '' !== $stored_content;
-$robots_url   = get_site_url() . '/robots.txt';
+$divit_robottxt_has_content  = '' !== $divit_robottxt_stored_content;
+$divit_robottxt_robots_url   = get_site_url() . '/robots.txt';
 
 // ── HTTP-level status notice (redirect query arg) ─────────────────────────────
 
-$divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-status'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+$divit_robottxt_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-status'] ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 ?>
 
 <div class="wrap divit-robottxt-wrap">
@@ -55,22 +55,22 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 
 	<?php // ── Admin notices ───────────────────────────────────────────────── ?>
 
-	<?php if ( 'saved' === $divit_status ) : ?>
+	<?php if ( 'saved' === $divit_robottxt_status ) : ?>
 		<div class="notice notice-success is-dismissible" role="alert">
 			<p><?php esc_html_e( 'robots.txt content saved successfully.', 'divit-robottxt' ); ?></p>
 		</div>
 	<?php endif; ?>
 
-	<?php if ( 'error' === $divit_status && '' !== $error_message ) : ?>
+	<?php if ( 'error' === $divit_robottxt_status && '' !== $divit_robottxt_error_message ) : ?>
 		<div class="notice notice-error is-dismissible" role="alert">
 			<p>
 				<strong><?php esc_html_e( 'Save failed:', 'divit-robottxt' ); ?></strong>
-				<?php echo esc_html( $error_message ); ?>
+				<?php echo esc_html( $divit_robottxt_error_message ); ?>
 			</p>
 		</div>
 	<?php endif; ?>
 
-	<?php if ( $physical_exists ) : ?>
+	<?php if ( $divit_robottxt_physical_exists ) : ?>
 		<div class="notice notice-error" role="alert">
 			<p>
 				<strong><?php esc_html_e( 'Physical file detected:', 'divit-robottxt' ); ?></strong>
@@ -79,7 +79,7 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 		</div>
 	<?php endif; ?>
 
-	<?php if ( ! $blog_public ) : ?>
+	<?php if ( ! $divit_robottxt_blog_public ) : ?>
 		<div class="notice notice-warning" role="alert">
 			<p>
 				<strong><?php esc_html_e( 'Search engines are discouraged:', 'divit-robottxt' ); ?></strong>
@@ -151,7 +151,7 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 					</span>
 
 					<?php
-					$quick_rules = array(
+					$divit_robottxt_quick_rules = array(
 						'User-agent: *'                       => 'User-agent: *',
 						'Disallow: /wp-admin/'                => 'Disallow: /wp-admin/',
 						'Allow: /wp-admin/admin-ajax.php'     => 'Allow: /wp-admin/admin-ajax.php',
@@ -161,13 +161,13 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 						'Sitemap: ' . get_site_url() . '/sitemap.xml' => 'Sitemap',
 					);
 
-					foreach ( $quick_rules as $rule => $label ) :
+					foreach ( $divit_robottxt_quick_rules as $divit_robottxt_rule => $divit_robottxt_label ) :
 						?>
 						<button
 							type="button"
 							class="button button-small divit-quick-insert"
-							data-value="<?php echo esc_attr( $rule ); ?>"
-						><?php echo esc_html( $label ); ?></button>
+							data-value="<?php echo esc_attr( $divit_robottxt_rule ); ?>"
+						><?php echo esc_html( $divit_robottxt_label ); ?></button>
 					<?php endforeach; ?>
 				</div>
 
@@ -189,7 +189,7 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 						autocapitalize="off"
 						wrap="off"
 						aria-describedby="divit-editor-help"
-					><?php echo esc_textarea( $display_content ); ?></textarea>
+					><?php echo esc_textarea( $divit_robottxt_display_content ); ?></textarea>
 
 					<p id="divit-editor-help" class="description">
 						<?php
@@ -210,7 +210,7 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 					</button>
 
 					<a
-						href="<?php echo esc_url( $robots_url ); ?>"
+						href="<?php echo esc_url( $divit_robottxt_robots_url ); ?>"
 						target="_blank"
 						rel="noopener noreferrer"
 						class="button button-secondary button-large"
@@ -237,14 +237,14 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 
 				<ul class="divit-status-list">
 
-					<li class="divit-status-list__item <?php echo $physical_exists ? 'is-warning' : 'is-ok'; ?>">
+					<li class="divit-status-list__item <?php echo $divit_robottxt_physical_exists ? 'is-warning' : 'is-ok'; ?>">
 						<span
-							class="dashicons <?php echo $physical_exists ? 'dashicons-warning' : 'dashicons-yes-alt'; ?>"
+							class="dashicons <?php echo $divit_robottxt_physical_exists ? 'dashicons-warning' : 'dashicons-yes-alt'; ?>"
 							aria-hidden="true"
 						></span>
 						<span>
 							<?php
-							if ( $physical_exists ) {
+							if ( $divit_robottxt_physical_exists ) {
 								esc_html_e( 'Physical robots.txt file found — plugin bypassed', 'divit-robottxt' );
 							} else {
 								esc_html_e( 'No physical robots.txt file', 'divit-robottxt' );
@@ -253,14 +253,14 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 						</span>
 					</li>
 
-					<li class="divit-status-list__item <?php echo $blog_public ? 'is-ok' : 'is-warning'; ?>">
+					<li class="divit-status-list__item <?php echo $divit_robottxt_blog_public ? 'is-ok' : 'is-warning'; ?>">
 						<span
-							class="dashicons <?php echo $blog_public ? 'dashicons-yes-alt' : 'dashicons-warning'; ?>"
+							class="dashicons <?php echo $divit_robottxt_blog_public ? 'dashicons-yes-alt' : 'dashicons-warning'; ?>"
 							aria-hidden="true"
 						></span>
 						<span>
 							<?php
-							if ( $blog_public ) {
+							if ( $divit_robottxt_blog_public ) {
 								esc_html_e( 'Site is visible to search engines', 'divit-robottxt' );
 							} else {
 								esc_html_e( 'Discourage search engines is ON', 'divit-robottxt' );
@@ -269,14 +269,14 @@ $divit_status = isset( $_GET['divit-status'] ) ? sanitize_key( $_GET['divit-stat
 						</span>
 					</li>
 
-					<li class="divit-status-list__item <?php echo $has_content ? 'is-ok' : 'is-neutral'; ?>">
+					<li class="divit-status-list__item <?php echo $divit_robottxt_has_content ? 'is-ok' : 'is-neutral'; ?>">
 						<span
-							class="dashicons <?php echo $has_content ? 'dashicons-yes-alt' : 'dashicons-minus'; ?>"
+							class="dashicons <?php echo $divit_robottxt_has_content ? 'dashicons-yes-alt' : 'dashicons-minus'; ?>"
 							aria-hidden="true"
 						></span>
 						<span>
 							<?php
-							if ( $has_content ) {
+							if ( $divit_robottxt_has_content ) {
 								esc_html_e( 'Custom content active', 'divit-robottxt' );
 							} else {
 								esc_html_e( 'Using WordPress default', 'divit-robottxt' );

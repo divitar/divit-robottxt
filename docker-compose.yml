@@ -40,8 +40,8 @@ services:
         define( 'SCRIPT_DEBUG',     true  );
         define( 'SAVEQUERIES',      true  );
     volumes:
-      # Plugin source mounted directly — changes reflect instantly, no rebuild needed.
-      - .:/var/www/html/wp-content/plugins/divit-robottxt:cached
+      # Only the plugin/ subdirectory is mounted — dev files are excluded.
+      - ./plugin:/var/www/html/wp-content/plugins/divit-robottxt:cached
       # Named volume keeps the rest of WordPress between restarts.
       - wp_data:/var/www/html
     networks:
@@ -62,7 +62,7 @@ services:
       WORDPRESS_DB_USER:     ${MYSQL_USER:-wordpress}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-wordpress}
     volumes:
-      - .:/var/www/html/wp-content/plugins/divit-robottxt:cached
+      - ./plugin:/var/www/html/wp-content/plugins/divit-robottxt:cached
       - wp_data:/var/www/html
     networks:
       - wp_net

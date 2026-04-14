@@ -121,8 +121,8 @@ class Divit_RobotTXT_Admin {
 			);
 		}
 
-		// 3. Retrieve raw POST value (wp_unslash happens inside save_rules).
-		$raw = isset( $_POST['divit_robottxt_content'] ) ? $_POST['divit_robottxt_content'] : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// 3. Retrieve and unslash the raw POST value before passing to sanitisation.
+		$raw = isset( $_POST['divit_robottxt_content'] ) ? wp_unslash( $_POST['divit_robottxt_content'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		// 4. Delegate sanitisation, validation and storage.
 		$result = Divit_RobotTXT_Options::save_rules( $raw );

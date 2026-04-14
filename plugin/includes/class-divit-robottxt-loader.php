@@ -56,13 +56,17 @@ class Divit_RobotTXT_Loader {
 	/**
 	 * Register the plugin text domain on the `init` hook.
 	 *
+	 * Required for WordPress < 6.1 compatibility. Since WP 6.1 the core loads
+	 * plugin translations JIT using the Text Domain / Domain Path headers, but
+	 * plugins declaring Requires at least: 5.0 must still call this explicitly.
+	 *
 	 * @since 1.0.0
 	 */
 	private function register_textdomain() {
 		add_action(
 			'init',
 			static function () {
-				load_plugin_textdomain(
+				load_plugin_textdomain( // phpcs:ignore WordPress.WP.DeprecatedFunctions.load_plugin_textdomainFound
 					'divit-robottxt',
 					false,
 					dirname( plugin_basename( DIVIT_ROBOTTXT_PLUGIN_FILE ) ) . '/languages/'
