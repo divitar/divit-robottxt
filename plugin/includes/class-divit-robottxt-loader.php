@@ -23,13 +23,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Divit_RobotTXT_Loader {
 
 	/**
-	 * Run the loader: load files, register text domain, wire up hooks.
+	 * Run the loader: load files and wire up hooks.
+	 *
+	 * Translation loading is handled automatically by WordPress:
+	 * - WP 4.6+: loads from wp-content/languages/plugins/ (translate.wordpress.org).
+	 * - WP 6.1+: loads JIT from the plugin's /languages/ dir via Text Domain header.
 	 *
 	 * @since 1.0.0
 	 */
 	public function run() {
 		$this->load_dependencies();
-		$this->register_textdomain();
 		$this->register_robots_hooks();
 
 		if ( is_admin() ) {
@@ -51,28 +54,6 @@ class Divit_RobotTXT_Loader {
 			require_once DIVIT_ROBOTTXT_PLUGIN_DIR . 'admin/class-divit-robottxt-admin.php';
 			require_once DIVIT_ROBOTTXT_PLUGIN_DIR . 'admin/class-divit-robottxt-ajax.php';
 		}
-	}
-
-	/**
-	 * Register the plugin text domain on the `init` hook.
-	 *
-	 * Required for WordPress < 6.1 compatibility. Since WP 6.1 the core loads
-	 * plugin translations JIT using the Text Domain / Domain Path headers, but
-	 * plugins declaring Requires at least: 5.0 must still call this explicitly.
-	 *
-	 * @since 1.0.0
-	 */
-	private function register_textdomain() {
-		add_action(
-			'init',
-			static function () {
-				load_plugin_textdomain( // phpcs:ignore WordPress.WP.DeprecatedFunctions.load_plugin_textdomainFound
-					'divit-robottxt',
-					false,
-					dirname( plugin_basename( DIVIT_ROBOTTXT_PLUGIN_FILE ) ) . '/languages/'
-				);
-			}
-		);
 	}
 
 	/**
