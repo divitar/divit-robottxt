@@ -2,7 +2,7 @@
 Contributors: divitar
 Tags: robots, robots.txt, seo, crawl, indexing
 Requires at least: 5.0
-Tested up to: 6.9
+Tested up to: 7.1
 Requires PHP: 7.2
 Stable tag: 1.0.0
 License: GPLv2 or later
